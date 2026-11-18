@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>EnzoBot - لوحة التحكم </title>
+    <!-- Google Fonts + Enhanced Font Stack -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 (Free Icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cairo', 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+            background: radial-gradient(circle at 10% 20%, #0a0f1e, #03050b);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow-x: hidden;
+            padding: 1.5rem;
+        }
+
+        /* --- animated orbs / background animation (enhanced) --- */
+        .background-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(70px);
+            opacity: 0.5;
+            animation: floatOrb 18s infinite alternate ease-in-out;
+        }
+
+        .orb-1 {
+            width: 50vw;
+            height: 50vw;
+            background: #5865f2;
+            top: -15%;
+            left: -20%;
+            animation-duration: 22s;
+        }
+
+        .orb-2 {
+            width: 60vw;
+            height: 60vw;
+            background: #eb459e;
+            bottom: -20%;
+            right: -15%;
+            animation-duration: 25s;
+            animation-delay: -3s;
+        }
+
+        .orb-3 {
+            width: 45vw;
+            height: 45vw;
+            background: #00a8fc;
+            top: 40%;
+            left: 30%;
+            opacity: 0.35;
+            animation-duration: 28s;
+            animation-delay: -6s;
+        }
+
+        @keyframes floatOrb {
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+            100% {
+                transform: translate(8%, 8%) scale(1.1);
+            }
+        }
+
+        /* glass panel core - responsive & fluid */
+        .glass-panel {
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px);
+            background: rgba(15, 25, 45, 0.55);
+            border-radius: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.3), 0 0 0 0.5px rgba(255, 255, 255, 0.1) inset;
+        }
+
+        .landing-container {
+            position: relative;
+            z-index: 10;
+            max-width: 580px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 2rem 2rem 2.8rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        /* logo animation + responsive size */
+        .logo-area {
+            margin-bottom: 1.5rem;
+        }
+
+        #bot-landing-avatar {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            background: #1e2a3e;
+            box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.5), 0 0 0 3px rgba(88, 101, 242, 0.4);
+            transition: transform 0.2s;
+            object-fit: cover;
+        }
+
+        .bouncing {
+            animation: gentleBounce 2.2s infinite ease-in-out;
+        }
+
+        @keyframes gentleBounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #FFFFFF, #B9C8FF);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.3px;
+        }
+
+        h1 span {
+            background: linear-gradient(125deg, #7289da, #9b59b6);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 8px rgba(114, 137, 218, 0.3);
+        }
+
+        p {
+            color: #dfe6f0;
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            font-weight: 500;
+            opacity: 0.9;
+        }
+
+        /* Discord button with responsive design */
+        .btn-discord {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            background: #5865f2;
+            color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+            padding: 1rem 2rem;
+            border-radius: 60px;
+            text-decoration: none;
+            transition: all 0.25s ease;
+            box-shadow: 0 10px 20px -8px rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            font-family: 'Cairo', sans-serif;
+            width: 100%;
+            max-width: 320px;
+            margin: 0 auto 1rem;
+            backdrop-filter: blur(4px);
+        }
+
+        .btn-discord svg {
+            width: 26px;
+            height: 26px;
+            transition: transform 0.2s;
+        }
+
+        .btn-discord:hover {
+            background: #4752c4;
+            transform: scale(1.02);
+            box-shadow: 0 18px 28px -12px rgba(0, 0, 0, 0.5);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .btn-discord:hover svg {
+            transform: rotate(3deg);
+        }
+
+        .login-section {
+            margin-top: 0.8rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .error-msg {
+            background: rgba(235, 69, 158, 0.2);
+            backdrop-filter: blur(8px);
+            padding: 0.7rem 1rem;
+            border-radius: 60px;
+            font-size: 0.85rem;
+            color: #ffb3d9;
+            border-right: 3px solid #eb459e;
+            margin-top: 0.5rem;
+            width: fit-content;
+            max-width: 90%;
+            display: inline-block;
+        }
+
+        /* footer note / responsive spacing */
+        .footer-note {
+            margin-top: 2rem;
+            font-size: 0.75rem;
+            color: #8e9aaf;
+            text-align: center;
+            border-top: 1px dashed rgba(255, 255, 255, 0.15);
+            padding-top: 1.2rem;
+        }
+
+        /* ========== RESPONSIVE: MOBILE & TABLET OPTIMIZATIONS ========== */
+        @media (max-width: 640px) {
+            body {
+                padding: 1rem;
+                align-items: center;
+            }
+            .landing-container {
+                padding: 1.8rem 1.5rem 2.2rem;
+                max-width: 96%;
+            }
+            h1 {
+                font-size: 1.75rem;
+                line-height: 1.3;
+            }
+            p {
+                font-size: 0.9rem;
+                margin-bottom: 1.5rem;
+            }
+            #bot-landing-avatar {
+                width: 85px;
+                height: 85px;
+            }
+            .btn-discord {
+                padding: 0.85rem 1.2rem;
+                font-size: 1rem;
+                gap: 10px;
+                max-width: 280px;
+            }
+            .btn-discord svg {
+                width: 22px;
+                height: 22px;
+            }
+            .orb-1, .orb-2, .orb-3 {
+                filter: blur(60px);
+            }
+        }
+
+        /* tablets & small laptops (smooth adapt) */
+        @media (min-width: 641px) and (max-width: 1024px) {
+            .landing-container {
+                max-width: 550px;
+                padding: 2rem 2.2rem;
+            }
+            h1 {
+                font-size: 2rem;
+            }
+            #bot-landing-avatar {
+                width: 100px;
+                height: 100px;
+            }
+            .btn-discord {
+                max-width: 340px;
+            }
+        }
+
+        /* large screens: maintain readability */
+        @media (min-width: 1400px) {
+            .landing-container {
+                max-width: 650px;
+                padding: 2.5rem 2.8rem;
+            }
+            h1 {
+                font-size: 2.6rem;
+            }
+            p {
+                font-size: 1.1rem;
+            }
+            #bot-landing-avatar {
+                width: 130px;
+                height: 130px;
+            }
+        }
+
+        /* touch friendly : active state */
+        .btn-discord:active {
+            transform: scale(0.98);
+        }
+
+        /* extra smoothness for all screens */
+        a, button {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* custom scroll */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0e17;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #5865f2;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="background-animation">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+</div>
+
+<div class="landing-container glass-panel">
+    <div class="logo-area">
+        <!-- Dynamic avatar with brand + animated bounce -->
+        <img src="https://cdn.discordapp.com/embed/avatars/0.png" alt="EnzoBot Avatar" id="bot-landing-avatar" class="bouncing">
+    </div>
+    <h1>مرحباً بك في لوحة تحكم <span>EnzoBot</span></h1>
+    <p>الواجهة الأسهل والأسرع لإدارة سيرفرك وتشكيل البوت بالطريقة التي تناسبك تماماً.<br> إعدادات متقدمة، تحليلات فورية، واستجابة فائقة.</p>
+    
+    <div class="login-section">
+        <a href="/auth/discord" class="btn-discord" id="discord-login-btn">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+                <path d="M19.27 5.33C17.94 4.71 16.5 4.26 15 4a.09.09 0 0 0-.07.03c-.18.33-.39.76-.53 1.09a16.09 16.09 0 0 0-4.8 0c-.14-.33-.35-.76-.53-1.09a.09.09 0 0 0-.07-.03c-1.5.26-2.94.71-4.27 1.33-.01 0-.02.01-.03.02-2.72 4.07-3.47 8.03-3.1 11.95 0 .02.01.04.03.05 1.8 1.32 3.53 2.12 5.24 2.65.03.01.06-.01.07-.04.4-.55.76-1.13 1.07-1.74.02-.04 0-.08-.04-.09-.57-.22-1.11-.48-1.64-.78-.04-.02-.04-.08-.01-.11.11-.08.22-.17.33-.25.02-.02.05-.02.07-.01 3.44 1.57 7.15 1.57 10.55 0 .02-.01.05-.01.07.01.11.08.22.17.33.25.03.03.03.09-.01.11-.52.3-1.07.56-1.64.78-.04.01-.05.06-.04.09.32.61.68 1.19 1.07 1.74.01.03.04.05.07.04 1.71-.53 3.44-1.33 5.24-2.65.02-.01.03-.03.03-.05.44-4.53-.73-8.46-3.1-11.95-.01-.01-.02-.02-.03-.02zM8.52 14.91c-1.03 0-1.89-.95-1.89-2.12s.84-2.12 1.89-2.12c1.06 0 1.9.96 1.89 2.12 0 1.17-.84 2.12-1.89 2.12zm6.97 0c-1.03 0-1.89-.95-1.89-2.12s.84-2.12 1.89-2.12c1.06 0 1.9.96 1.89 2.12 0 1.17-.83 2.12-1.89 2.12z"/>
+            </svg>
+            <span>دخول بحساب Discord</span>
+        </a>
+        <p class="error-msg" id="login-error" style="display: none;"></p>
+    </div>
+    <div class="footer-note">
+        <i class="fas fa-shield-alt"></i> منصة آمنة بالكامل • توافق كامل مع جميع الأجهزة
+    </div>
+</div>
+
+<script>
+    (function() {
+        // Helper: fetch authentication status and redirect if needed
+        function checkAuthAndRedirect() {
+            fetch('/api/auth/status', {
+                method: 'GET',
+                credentials: 'same-origin',   // include cookies/session
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(res => {
+                // even if status is not 200, we try parse, but safeguard
+                if (!res.ok) {
+                    // if endpoint fails (maybe not implemented yet), we don't redirect aggressively
+                    // but we don't break the UI. Just stay.
+                    return null;
+                }
+                return res.json();
+            })
+            .then(data => {
+                if (data && data.loggedIn === true) {
+                    // Already authenticated → move to dashboard
+                    window.location.href = '/dashboard.html';
+                }
+            })
+            .catch(err => {
+                // In case network / server not ready, we keep user on landing.
+                // We don't show any error for status check to avoid confusion.
+                console.debug("Auth status fetch non-critical error", err);
+            });
+        }
+
+        // run on load to see if already logged in (prevents double login)
+        checkAuthAndRedirect();
+
+        // Handle URL error parameters (access_denied, etc)
+        const urlParams = new URLSearchParams(window.location.search);
+        const errorType = urlParams.get('error');
+        const errorMsgDiv = document.getElementById('login-error');
+
+        if (errorType === 'access_denied') {
+            if (errorMsgDiv) {
+                errorMsgDiv.textContent = '⚠️ تم رفض الوصول أو إلغاء تسجيل الدخول. يرجى المحاولة مرة أخرى.';
+                errorMsgDiv.style.display = 'block';
+                // auto hide after 5 seconds
+                setTimeout(() => {
+                    if (errorMsgDiv) errorMsgDiv.style.display = 'none';
+                }, 6000);
+            }
+        } 
+        // optional: handle other errors like 'oauth_failed'
+        else if (errorType === 'oauth_failed' || urlParams.get('auth_error')) {
+            if (errorMsgDiv) {
+                errorMsgDiv.textContent = '❌ حدث خطأ أثناء محاولة تسجيل الدخول. يرجى التحقق من إعدادات البوت أو المحاولة لاحقاً.';
+                errorMsgDiv.style.display = 'block';
+                setTimeout(() => {
+                    if (errorMsgDiv) errorMsgDiv.style.display = 'none';
+                }, 7000);
+            }
+        }
+
+        // Additional robust behavior: make sure the login button works even if /auth/discord endpoint
+        // might have trailing issues but we keep original href. Also, we can attach a small loading indicator
+        const loginBtn = document.getElementById('discord-login-btn');
+        if (loginBtn) {
+            loginBtn.addEventListener('click', function(e) {
+                // optional: add a visual feedback that login is in progress
+                const originalText = loginBtn.innerHTML;
+                loginBtn.style.opacity = '0.7';
+                loginBtn.style.pointerEvents = 'none';
+                // we don't prevent default because we need to navigate to /auth/discord
+                // but add a tiny loader inside?
+                const spanEl = loginBtn.querySelector('span');
+                if (spanEl) {
+                    const originalSpanText = spanEl.innerText;
+                    spanEl.innerHTML = 'جاري التوجيه... <i class="fas fa-spinner fa-pulse"></i>';
+                    // restore after short delay? Actually the page will navigate, so it's okay.
+                }
+                // we let the href work normally, but if there's any client-side error we revert
+                setTimeout(() => {
+                    loginBtn.style.opacity = '';
+                    loginBtn.style.pointerEvents = '';
+                    if (spanEl) spanEl.innerText = originalText;
+                }, 2000);
+            });
+        }
+        
+        // Enhance responsiveness: dynamically adjust avatar or add additional quality-of-life 
+        // Prevent image flicker or fallback - using high quality discord avatar placeholder,
+        // but we could replace with custom EnzoBot logo if needed (but stays consistent).
+        // Also, for better performance and retina screens, we set image loading eager
+        const botAvatar = document.getElementById('bot-landing-avatar');
+        if (botAvatar) {
+            botAvatar.setAttribute('loading', 'eager');
+            botAvatar.setAttribute('alt', 'EnzoBot Logo');
+            // Fallback for any broken img: replace with data:image but keep style.
+            botAvatar.onerror = function() {
+                // In case the default CDN fails, we use an inline svg or font awesome bot icon? but keep minimalist.
+                this.src = 'https://cdn.discordapp.com/icons/123/abc.png?size=128'; // fallback discord cdn safe? Actually we can use a base64 simple icon
+                // fallback again: if still error, set inline style
+                if (this.complete && this.naturalWidth === 0) {
+                    this.style.background = '#5865f2';
+                    this.style.display = 'flex';
+                    this.style.alignItems = 'center';
+                    this.style.justifyContent = 'center';
+                    this.style.fontSize = '3rem';
+                    this.style.color = 'white';
+                    // we cannot change src text easily, but prevent infinite loop
+                }
+            };
+        }
+        
+        // Optional: dynamically add 'active' class for glass panel to adapt on mobile orientation changes
+        window.addEventListener('resize', function() {
+            // noop but ensures any layout shift is re-calc, fine
+            if (window.innerWidth < 480) {
+                document.body.style.padding = '0.8rem';
+            } else {
+                document.body.style.padding = '1.5rem';
+            }
+        });
+        
+        // Additional safety for rtl/ scroll behaviour: remove any horizontal overflow
+        document.body.style.overflowX = 'hidden';
+        
+        // make sure any anchor with # doesn't cause weird behavior (none used)
+        // For better UX, check if discord login link triggers correct domain (relative)
+        // Bonus: add a subtle hover tooltip to button
+        if (loginBtn) {
+            loginBtn.title = "سيتم توجيهك إلى صفحة مصادقة Discord الآمنة";
+        }
+    })();
+</script>
+</body>
+</html>

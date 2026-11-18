@@ -1,0 +1,139 @@
+{
+  "token": "MTU1NDgxMDM0NjYzNDc0ODAxNA.GHnXZ_.vCRihHm75b5jShX7LDQpCBBokgXCJjj7s6m2is",
+  "clientId": "1554810346634748014",
+  "guildId": "1552302702862798848",
+  "mutedRoleId": "1554843606123155576",
+  "jailRoleId": "1557108140921856095",
+  "clientSecret": "7KggotOG1UOkBonQzyTT1EzejSFiNZMj",
+  "callbackUrl": "http://de30.spaceify.eu:25835/auth/discord/callback",
+  "dashboardPort": 11206,
+  "jailChannelId": "1557107164303073290",
+  "logChannelId": "1553358661026578492",
+  "welcomeChannelId": "",
+  "leaveChannelId": "",
+  "ticketCategoryId": "",
+  "ticketLogChannelId": "",
+  "levelRoles": {},
+  "applicationLogChannelId": "1483625704926089268",
+  "statsCategoryId": "",
+  "memberStatChannelId": "",
+  "botStatChannelId": "",
+  "suggestionChannelId": "",
+  "levelChannelId": "1554866427452719144",
+  "autoRoleId": "",
+  "autoResponders": [],
+  "welcomeBgUrl": "",
+  "welcomeColor": "#5865f2",
+  "tempVcHubId": "1557107140307722240",
+  "tempVcCategoryId": "1557344423019290655",
+  "logMessageDeleteId": "1554833701773381772",
+  "logMessageUpdateId": "1554833701773381772",
+  "logVoiceChannelId": "1554833701773381772",
+  "logRoleUpdateId": "1554833701773381772",
+  "commandAliases": [
+    {
+      "alias": "س",
+      "command": "jail",
+      "requirePrefix": false
+    },
+    {
+      "alias": "ف",
+      "command": "open",
+      "requirePrefix": false
+    },
+    {
+      "alias": "ق",
+      "command": "lock",
+      "requirePrefix": false
+    },
+    {
+      "alias": "فك",
+      "command": "unjail",
+      "requirePrefix": false
+    },
+    {
+      "alias": "م",
+      "command": "purge",
+      "requirePrefix": false
+    },
+    {
+      "alias": "topv",
+      "command": "voicetop",
+      "requirePrefix": false
+    },
+    {
+      "alias": "بنعالي",
+      "command": "ban",
+      "requirePrefix": false
+    },
+    {
+      "alias": "بزبي",
+      "command": "ban",
+      "requirePrefix": false
+    }
+  ],
+  "colorRoles": [
+    {
+      "name": "1",
+      "roleId": "1555597118524366909",
+      "hex": "#A60000",
+      "emoji": "🎨"
+    },
+    {
+      "name": "2",
+      "roleId": "1555667369093767168",
+      "hex": "#3D3D3D",
+      "emoji": "🎨"
+    },
+    {
+      "name": "3",
+      "roleId": "1555667494923014324",
+      "hex": "#7A4BFF",
+      "emoji": "🎨"
+    },
+    {
+      "name": "4",
+      "roleId": "1555667614833836043",
+      "hex": "#008A00",
+      "emoji": "🎨"
+    },
+    {
+      "name": "5",
+      "roleId": "1555667848980992020",
+      "hex": "#E0E0E0",
+      "emoji": "🎨"
+    },
+    {
+      "name": "6",
+      "roleId": "1555668007961755810",
+      "hex": "#0022CC",
+      "emoji": "🎨"
+    },
+    {
+      "name": "7",
+      "roleId": "1555668171921555466",
+      "hex": "#B38F00",
+      "emoji": "🎨"
+    },
+    {
+      "name": "8",
+      "roleId": "1555668323189006458",
+      "hex": "#1A1A1A",
+      "emoji": "🎨"
+    },
+    {
+      "name": "9",
+      "roleId": "1555668454588157972",
+      "hex": "#0099FF",
+      "emoji": "🎨"
+    },
+    {
+      "name": "10",
+      "roleId": "1555668596330463354",
+      "hex": "#C93C3C",
+      "emoji": "🎨"
+    }
+  ],
+  "voiceXpPerMinute": 10,
+  "brandName": "Z9 Server"
+}
